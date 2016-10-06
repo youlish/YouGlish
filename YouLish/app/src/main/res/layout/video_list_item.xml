@@ -28,6 +28,7 @@
         android:scaleType="centerInside"
         android:src="@drawable/no_thumbnail" />
 
+<<<<<<< HEAD
     <TextView
         android:id="@+id/text"
         android:layout_width="0dp"
@@ -38,5 +39,16 @@
         android:textAppearance="?android:attr/textAppearanceSmall"
         android:textColor="@color/colorBlack"
         android:textStyle="bold" />
+=======
+  <TextView
+      android:id="@+id/text"
+      android:layout_width="0dp"
+      android:layout_height="wrap_content"
+      android:layout_weight="1"
+      android:layout_gravity="center_vertical"
+      android:layout_marginLeft="5dp"
+      android:textAppearance="?android:attr/textAppearanceSmall"
+      android:textColor="@color/colorBlack"/>
+>>>>>>> origin/master
 
 </LinearLayout>
