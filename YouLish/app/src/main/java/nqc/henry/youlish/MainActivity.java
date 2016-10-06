@@ -5,11 +5,30 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.SearchView;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
+import android.view.ViewGroup;
 import android.widget.TabHost;
 import android.widget.Toast;
 
-public class MainActivity extends AppCompatActivity implements TabHost.OnTabChangeListener {
+import com.google.android.youtube.player.YouTubeApiServiceUtil;
+import com.google.android.youtube.player.YouTubeInitializationResult;
 
+import nqc.henry.youlish.frament.VideoListFrament;
+
+import static android.view.ViewGroup.LayoutParams.MATCH_PARENT;
+
+public class MainActivity extends AppCompatActivity implements TabHost.OnTabChangeListener {
+    /** The duration of the animation sliding up the video in portrait. */
+    private static final int ANIMATION_DURATION_MILLIS = 300;
+    /** The padding between the video list and the video in landscape orientation. */
+    private static final int LANDSCAPE_VIDEO_PADDING_DP = 5;
+
+    /** The request code when calling startActivityForResult to recover from an API service error. */
+    private static final int RECOVERY_DIALOG_REQUEST = 1;
+
+    private VideoListFrament listFragment;
+
+    private View videoBox;
     private SearchView searchView;
     private TabHost tabHost;
 
@@ -17,7 +36,36 @@ public class MainActivity extends AppCompatActivity implements TabHost.OnTabChan
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+        listFragment = (VideoListFrament) getFragmentManager().findFragmentById(R.id.list_fragment);
+        listFragment.setActivity(MainActivity.this);
+        /*listFragment.getView().setVisibility(isFullscreen ? View.GONE : View.VISIBLE);
+        listFragment.setLabelVisibility(isPortrait);*/
+        setLayoutSize(listFragment.getView(), MATCH_PARENT, MATCH_PARENT);
+
+
+
+
+        checkYouTubeApi();
         loadTabs();
+    }
+
+    private static void setLayoutSize(View view, int width, int height) {
+        ViewGroup.LayoutParams params = view.getLayoutParams();
+        params.width = width;
+        params.height = height;
+        view.setLayoutParams(params);
+    }
+
+    private void checkYouTubeApi() {
+        YouTubeInitializationResult errorReason =
+                YouTubeApiServiceUtil.isYouTubeApiServiceAvailable(this);
+        if (errorReason.isUserRecoverableError()) {
+            errorReason.getErrorDialog(this, RECOVERY_DIALOG_REQUEST).show();
+        } else if (errorReason != YouTubeInitializationResult.SUCCESS) {
+            String errorMessage =
+                    String.format("error", errorReason.toString());
+            Toast.makeText(this, errorMessage, Toast.LENGTH_LONG).show();
+        }
     }
 
     public void loadTabs() {

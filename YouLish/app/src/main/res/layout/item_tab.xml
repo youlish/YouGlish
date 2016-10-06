@@ -26,7 +26,11 @@
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:orientation="vertical">
-
+                <fragment
+                    class="nqc.henry.youlish.frament.VideoListFrament"
+                    android:id="@+id/list_fragment"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"/>
             </LinearLayout>
 
             <LinearLayout
