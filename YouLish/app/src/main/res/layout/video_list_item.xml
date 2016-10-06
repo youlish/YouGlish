@@ -1,5 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?>
-<!--
+<?xml version="1.0" encoding="utf-8"?><!--
   Copyright 2012 Google Inc. All Rights Reserved.
 
   Licensed under the Apache License, Version 2.0 (the "License");
@@ -17,26 +16,27 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="95dp"
-    android:orientation="horizontal"
+    android:background="?android:attr/activatedBackgroundIndicator"
     android:gravity="center"
-    android:background="?android:attr/activatedBackgroundIndicator">
+    android:orientation="horizontal">
 
-  <com.google.android.youtube.player.YouTubeThumbnailView
-      android:id="@+id/thumbnail"
-      android:layout_width="wrap_content"
-      android:layout_height="match_parent"
-      android:src="@drawable/no_thumbnail"
-      android:adjustViewBounds="true"
-      android:scaleType="centerInside"/>
+    <com.google.android.youtube.player.YouTubeThumbnailView
+        android:id="@+id/thumbnail"
+        android:layout_width="wrap_content"
+        android:layout_height="match_parent"
+        android:adjustViewBounds="true"
+        android:scaleType="centerInside"
+        android:src="@drawable/no_thumbnail" />
 
-  <TextView
-      android:id="@+id/text"
-      android:layout_width="0dp"
-      android:layout_height="wrap_content"
-      android:layout_weight="1"
-      android:layout_gravity="center_vertical"
-      android:layout_marginLeft="5dp"
-      android:textAppearance="?android:attr/textAppearanceSmall"
-      android:textColor="#fff"/>
+    <TextView
+        android:id="@+id/text"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_vertical"
+        android:layout_marginLeft="5dp"
+        android:layout_weight="1"
+        android:textAppearance="?android:attr/textAppearanceSmall"
+        android:textColor="@color/colorBlack"
+        android:textStyle="bold" />
 
 </LinearLayout>

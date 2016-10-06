@@ -8,6 +8,7 @@ import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TabHost;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.google.android.youtube.player.YouTubeApiServiceUtil;
@@ -98,6 +99,7 @@ public class MainActivity extends AppCompatActivity implements TabHost.OnTabChan
         tabHost.addTab(tabSpec);
 
         tabHost.setCurrentTab(0);
+        setTabColor();
         tabHost.setOnTabChangedListener(this);
     }
 
@@ -110,17 +112,27 @@ public class MainActivity extends AppCompatActivity implements TabHost.OnTabChan
         return true;
     }
 
+    public void setTabColor() {
+        for (int i = 0; i < tabHost.getTabWidget().getChildCount(); i++) {
+            tabHost.getTabWidget().getChildAt(i).setBackgroundColor(getResources().getColor(R.color.colorWhite)); // unselected
+            TextView tv = (TextView) tabHost.getTabWidget().getChildAt(i).findViewById(android.R.id.title); //Unselected Tabs
+            tv.setTextColor(getResources().getColor(R.color.colorPrimary));
+        }
+        tabHost.getTabWidget().getChildAt(tabHost.getCurrentTab()).setBackgroundColor(getResources().getColor(R.color.colorPrimary)); // selected
+        TextView tv = (TextView) tabHost.getCurrentTabView().findViewById(android.R.id.title); //for Selected Tab
+        tv.setTextColor(getResources().getColor(R.color.colorWhite));
+    }
+
     @Override
     public void onTabChanged(String s) {
+        setTabColor();
+
         switch (s) {
             case "ALL":
                 Toast.makeText(this, "ALL", Toast.LENGTH_SHORT).show();
                 break;
             case "US":
                 Toast.makeText(this, "US", Toast.LENGTH_SHORT).show();
-                break;
-            case "Contacts":
-
                 break;
             case "UK":
                 Toast.makeText(this, "UK", Toast.LENGTH_SHORT).show();
