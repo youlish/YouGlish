@@ -16,7 +16,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import nqc.henry.youlish.DeveloperKey;
+import nqc.henry.youlish.model.DeveloperKey;
 import nqc.henry.youlish.R;
 import nqc.henry.youlish.model.VideoEntry;
 

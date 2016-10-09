@@ -24,7 +24,6 @@ public class VideoListFrament extends ListFragment{
     static {
         List<VideoEntry> list = new ArrayList<VideoEntry>();
         list.add(new VideoEntry("YouTube Collection", "6yXA7HMMNxs"));
-        list.add(new VideoEntry("Spa thi phi", "7an1fmavfdk"));
         list.add(new VideoEntry("Chrome Multitask", "UiLSiqyDf4Y"));
         list.add(new VideoEntry("Google Fiber", "re0VRK6ouwI"));
         list.add(new VideoEntry("Autocompleter", "blB_X38YSxQ"));

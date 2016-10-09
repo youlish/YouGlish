@@ -16,7 +16,7 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="95dp"
-    android:background="?android:attr/activatedBackgroundIndicator"
+    android:background="@color/colorWhite"
     android:gravity="center"
     android:orientation="horizontal">
 
@@ -35,9 +35,8 @@
         android:layout_gravity="center_vertical"
         android:layout_marginLeft="5dp"
         android:layout_weight="1"
-        android:textAppearance="?android:attr/textAppearanceSmall"
         android:textColor="@color/colorBlack"
-        android:textStyle="bold" />
+        android:textSize="@dimen/text_medium" />
 
 
 </LinearLayout>

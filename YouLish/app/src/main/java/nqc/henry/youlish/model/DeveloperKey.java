@@ -1,6 +1,6 @@
 // Copyright 2014 Google Inc. All Rights Reserved.
 
-package nqc.henry.youlish;
+package nqc.henry.youlish.model;
 
 /**
  * Static container class for holding a reference to your YouTube Developer Key.

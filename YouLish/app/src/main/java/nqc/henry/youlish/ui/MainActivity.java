@@ -1,4 +1,4 @@
-package nqc.henry.youlish;
+package nqc.henry.youlish.ui;
 
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
@@ -7,24 +7,33 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 import android.widget.TabHost;
+import android.widget.TabWidget;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import com.google.android.youtube.player.YouTubeApiServiceUtil;
 import com.google.android.youtube.player.YouTubeInitializationResult;
 
+import nqc.henry.youlish.R;
 import nqc.henry.youlish.frament.VideoListFrament;
 
 import static android.view.ViewGroup.LayoutParams.MATCH_PARENT;
 
 public class MainActivity extends AppCompatActivity implements TabHost.OnTabChangeListener {
-    /** The duration of the animation sliding up the video in portrait. */
+    /**
+     * The duration of the animation sliding up the video in portrait.
+     */
     private static final int ANIMATION_DURATION_MILLIS = 300;
-    /** The padding between the video list and the video in landscape orientation. */
+    /**
+     * The padding between the video list and the video in landscape orientation.
+     */
     private static final int LANDSCAPE_VIDEO_PADDING_DP = 5;
 
-    /** The request code when calling startActivityForResult to recover from an API service error. */
+    /**
+     * The request code when calling startActivityForResult to recover from an API service error.
+     */
     private static final int RECOVERY_DIALOG_REQUEST = 1;
 
     private VideoListFrament listFragment;
@@ -32,6 +41,13 @@ public class MainActivity extends AppCompatActivity implements TabHost.OnTabChan
     private View videoBox;
     private SearchView searchView;
     private TabHost tabHost;
+
+    private static void setLayoutSize(View view, int width, int height) {
+        ViewGroup.LayoutParams params = view.getLayoutParams();
+        params.width = width;
+        params.height = height;
+        view.setLayoutParams(params);
+    }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -44,17 +60,8 @@ public class MainActivity extends AppCompatActivity implements TabHost.OnTabChan
         setLayoutSize(listFragment.getView(), MATCH_PARENT, MATCH_PARENT);
 
 
-
-
         checkYouTubeApi();
         loadTabs();
-    }
-
-    private static void setLayoutSize(View view, int width, int height) {
-        ViewGroup.LayoutParams params = view.getLayoutParams();
-        params.width = width;
-        params.height = height;
-        view.setLayoutParams(params);
     }
 
     private void checkYouTubeApi() {
@@ -74,28 +81,27 @@ public class MainActivity extends AppCompatActivity implements TabHost.OnTabChan
 
         tabHost.setup();
 
-        //Tab contacts
         TabHost.TabSpec tabSpec = tabHost.newTabSpec("ALL");
         tabSpec.setContent(R.id.layoutAllVideo);
-        tabSpec.setIndicator("ALL");
+        tabSpec.setIndicator("", getResources().getDrawable(R.drawable.ic_home_selected));
         tabHost.addTab(tabSpec);
 
 
-        //Tab Gallery
         tabSpec = tabHost.newTabSpec("US");
         tabSpec.setContent(R.id.layoutUSVideo);
         tabSpec.setIndicator("US");
+        tabSpec.setIndicator("", getResources().getDrawable(R.drawable.ic_us));
         tabHost.addTab(tabSpec);
 
-        //Tab Phone
         tabSpec = tabHost.newTabSpec("UK");
         tabSpec.setContent(R.id.layoutUKVideo);
-        tabSpec.setIndicator("UK");
+        tabSpec.setIndicator("", getResources().getDrawable(R.drawable.ic_uk));
         tabHost.addTab(tabSpec);
-        //Tab list songs
+
+
         tabSpec = tabHost.newTabSpec("AUS");
         tabSpec.setContent(R.id.layoutAUSVideo);
-        tabSpec.setIndicator("AUS");
+        tabSpec.setIndicator("", getResources().getDrawable(R.drawable.ic_aus));
         tabHost.addTab(tabSpec);
 
         tabHost.setCurrentTab(0);
@@ -120,7 +126,44 @@ public class MainActivity extends AppCompatActivity implements TabHost.OnTabChan
         }
         tabHost.getTabWidget().getChildAt(tabHost.getCurrentTab()).setBackgroundColor(getResources().getColor(R.color.colorPrimary)); // selected
         TextView tv = (TextView) tabHost.getCurrentTabView().findViewById(android.R.id.title); //for Selected Tab
+        setTabIcon(tabHost.getCurrentTab());
+
         tv.setTextColor(getResources().getColor(R.color.colorWhite));
+    }
+
+    public void setTabIcon(int i) {
+        ImageView im = (ImageView) tabHost.getCurrentTabView().findViewById(android.R.id.icon);
+        ImageView im0 = (ImageView) tabHost.getTabWidget().getChildAt(0).findViewById(android.R.id.icon);
+        ImageView im1 = (ImageView) tabHost.getTabWidget().getChildAt(1).findViewById(android.R.id.icon);
+        ImageView im2 = (ImageView) tabHost.getTabWidget().getChildAt(2).findViewById(android.R.id.icon);
+        ImageView im3 = (ImageView) tabHost.getTabWidget().getChildAt(3).findViewById(android.R.id.icon);
+
+        switch (i) {
+            case 0:
+                im0.setImageResource(R.drawable.ic_home_selected);
+                im1.setImageResource(R.drawable.ic_us);
+                im2.setImageResource(R.drawable.ic_uk);
+                im3.setImageResource(R.drawable.ic_aus);
+                break;
+            case 1:
+                im0.setImageResource(R.drawable.ic_home);
+                im.setImageResource(R.drawable.ic_us_selected);
+                im2.setImageResource(R.drawable.ic_uk);
+                im3.setImageResource(R.drawable.ic_aus);
+                break;
+            case 2:
+                im0.setImageResource(R.drawable.ic_home);
+                im.setImageResource(R.drawable.ic_uk_selected);
+                im3.setImageResource(R.drawable.ic_aus);
+                im1.setImageResource(R.drawable.ic_us);
+                break;
+            case 3:
+                im0.setImageResource(R.drawable.ic_home);
+                im.setImageResource(R.drawable.ic_aus_selected);
+                im2.setImageResource(R.drawable.ic_uk);
+                im1.setImageResource(R.drawable.ic_us);
+                break;
+        }
     }
 
     @Override
@@ -129,18 +172,13 @@ public class MainActivity extends AppCompatActivity implements TabHost.OnTabChan
 
         switch (s) {
             case "ALL":
-                Toast.makeText(this, "ALL", Toast.LENGTH_SHORT).show();
                 break;
             case "US":
-                Toast.makeText(this, "US", Toast.LENGTH_SHORT).show();
                 break;
             case "UK":
-                Toast.makeText(this, "UK", Toast.LENGTH_SHORT).show();
                 break;
             case "AUS":
-                Toast.makeText(this, "AUS", Toast.LENGTH_SHORT).show();
                 break;
-
         }
     }
 }
