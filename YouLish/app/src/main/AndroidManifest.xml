@@ -20,7 +20,13 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".ui.VideoActivity"></activity>
+        <activity
+            android:screenOrientation="sensor"
+            android:configChanges="keyboardHidden|orientation|screenSize"
+            android:name=".ui.VideoActivity">
+            <meta-data android:name="minVersion" android:value="8"/>
+            <meta-data android:name="isLaunchableActivity" android:value="true"/>
+        </activity>
     </application>
 
 </manifest>

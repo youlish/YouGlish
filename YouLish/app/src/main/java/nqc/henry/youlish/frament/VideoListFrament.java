@@ -2,6 +2,7 @@ package nqc.henry.youlish.frament;
 
 import android.app.Activity;
 import android.app.ListFragment;
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.ListView;
@@ -12,6 +13,7 @@ import java.util.List;
 
 import nqc.henry.youlish.adapter.PageAdapter;
 import nqc.henry.youlish.model.VideoEntry;
+import nqc.henry.youlish.ui.VideoActivity;
 
 /**
  * Created by hinh1 on 10/6/2016.
@@ -54,23 +56,10 @@ public class VideoListFrament extends ListFragment{
     public void onListItemClick(ListView l, View v, int position, long id) {
         String videoId = VIDEO_LIST.get(position).getVideoId();
 
-       /* VideoFragment videoFragment =
-                (VideoFragment) getFragmentManager().findFragmentById(R.id.youtube_fragment);
-        videoFragment.setVideoId(videoId);
-        videoFragment.setActivity(activity);
-        // The videoBox is INVISIBLE if no video was previously selected, so we need to show it now.
-        if (videoBox.getVisibility() != View.VISIBLE) {
-            if (getResources().getConfiguration().orientation == Configuration.ORIENTATION_PORTRAIT) {
-                // Initially translate off the screen so that it can be animated in from below.
-                videoBox.setTranslationY(videoBox.getHeight());
-            }
-            videoBox.setVisibility(View.VISIBLE);
-        }
 
-        // If the fragment is off the screen, we animate it in.
-        if (videoBox.getTranslationY() > 0) {
-            videoBox.animate().translationY(0).setDuration(ANIMATION_DURATION_MILLIS);
-        }*/
+        Intent intent = new Intent(getActivity(),VideoActivity.class);
+        intent.putExtra("videoId",videoId);
+        startActivity(intent);
     }
 
     @Override

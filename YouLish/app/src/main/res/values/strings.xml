@@ -2,4 +2,6 @@
     <string name="app_name">YOUGLISH</string>
     <string name="search_button">search</string>
     <string name="search_hint">Search YouGlish</string>
+    <string name="error_player">There was an error initializing the YouTubePlayer (%1$s)</string>
+
 </resources>
